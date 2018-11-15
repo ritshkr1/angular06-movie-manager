@@ -1,0 +1,30 @@
+{
+  "Movies": [
+    {
+      "id": 1,
+      "name": "Spider Man",
+      "quality": "720",
+      "path": "192.168.1.1/share/movies"
+    },
+    {
+      "id": 2,
+      "name": "Iron man",
+      "quality": "720",
+      "path": "192.168.1.1/share/movies"
+    }
+  ],
+  "quality": [
+    {
+      "id": 1,
+      "name": "720px"
+    },
+    {
+      "id": 2,
+      "name": "1080px"
+    }
+  ],
+  "profile": {
+    "username": "lmadhuranga",
+    "ip":"192.168.1.1"
+  }
+}
