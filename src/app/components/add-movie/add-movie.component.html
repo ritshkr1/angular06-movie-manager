@@ -1,0 +1,14 @@
+<div class="add-movie">
+  <h3>Add Movie</h3>
+  <!-- <form #addMovie="ngForm" (submit)="addMovie()"> -->
+  <form (submit)="addMovie()">
+    <div class="input">
+      <label for="name">Name : </label>
+      <input type="text" [(ngModel)]="movie.name" name="name" title="Name">
+    </div>
+    <div class="input">
+      <br>
+      <button type="submit">Save Movie</button>
+    </div>
+  </form>
+</div>
