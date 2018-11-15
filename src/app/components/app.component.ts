@@ -10,9 +10,9 @@ import { Title } from '@angular/platform-browser';
 
 export class AppComponent {
   constructor(private titleService: Title){}
+  appName:string = appConfig.app.name;
   
-  ngOnInit(): void {    
-    let title = appConfig.app.name;
-    this.titleService.setTitle(title);
+  ngOnInit(): void {
+    this.titleService.setTitle(this.appName);
   }
 }

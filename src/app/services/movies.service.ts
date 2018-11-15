@@ -19,5 +19,13 @@ export class MoviesService {
         // ...and calling .json() on the response to return data
         .pipe(map((res: Response) => res.json()));
     }  
-    
+
+    // List all 
+    add(formData) {        
+        // ...using get request
+        return this.http.post(hostUrl, formData)
+        // ...and calling .json() on the response to return data
+        .pipe(map((res: Response) => res.json()));
+    }  
+     
 }

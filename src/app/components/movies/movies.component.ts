@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Http} from '@angular/http';
 import { Movie } from './movie';
 
-
+// Configuration file
 import { appConfig } from '../../config/globel.conf'
 
 import { MoviesService } from '../../services/movies.service';
