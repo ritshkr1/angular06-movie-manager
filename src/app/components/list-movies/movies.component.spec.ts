@@ -117,6 +117,8 @@ describe('MoviesComponent', () => {
     let getMovieSerSpy:any;
     let removeMoviesCompSpy:any;
     let detailsMoviesCompSpy:any;
+    let updateMovieSerSpy:any;
+    let countDeonalodsMoviesCompSpy:any;
     
     beforeEach(() => {
       removeMoviesCompSpy = spyOn(component, 'remove')
@@ -124,12 +126,18 @@ describe('MoviesComponent', () => {
 
       detailsMoviesCompSpy = spyOn(component, 'details')
       .and.callThrough();
+
+      countDeonalodsMoviesCompSpy = spyOn(component, 'countDownloads')
+      .and.callThrough();
       
       deleteMovieSerSpy = spyOn(moviesService, 'delete')
       .and.returnValue(of([]));
       
       getMovieSerSpy = spyOn(moviesService, 'get')
       .and.returnValue(of(mockMovies));
+      
+      updateMovieSerSpy = spyOn(moviesService, 'update')
+      .and.returnValue(of(mockMovies[1]))
     });
 
     xit('should hide details after click name', async(() => {
@@ -227,7 +235,19 @@ describe('MoviesComponent', () => {
       expect(deleteMovieSerSpy).not.toHaveBeenCalledWith();
       expect(deleteMovieSerSpy).not.toHaveBeenCalledWith('');
       expect(deleteMovieSerSpy).not.toHaveBeenCalledWith(`${mockMovies[0].id}`);
-    });    
+    });
+
+    it('should funciton details', () => {
+      component.details(mockMovies[0]);
+      expect(countDeonalodsMoviesCompSpy).not.toHaveBeenCalled();
+
+      component.details(mockMovies[1]);
+      expect(countDeonalodsMoviesCompSpy).toHaveBeenCalled();
+      expect(countDeonalodsMoviesCompSpy).toHaveBeenCalledWith(mockMovies[1]);
+      expect(updateMovieSerSpy).toHaveBeenCalled();
+      expect(updateMovieSerSpy).toHaveBeenCalledTimes(1);
+      
+    });
   });
 
 });

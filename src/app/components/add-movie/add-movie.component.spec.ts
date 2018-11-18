@@ -45,7 +45,7 @@ describe('AddMovieComponent', () => {
       providers:[
         MoviesService,
         QualitiesService, 
-        {provide: Router, useValue: router}
+        { provide: Router, useValue: router }
       ]
     })
     .compileComponents();

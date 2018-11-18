@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Form } from '@angular/forms';
+import { of, Observable } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 
 
@@ -19,14 +20,15 @@ export class EditMovieComponent implements OnInit {
   qualities:Quality[];
   
   constructor(
+    private movieService:MoviesService, 
+    private qualitiesService:QualitiesService,
     private router:Router,
     private route:ActivatedRoute, 
-    private movieService:MoviesService, 
-    private qualitiesService:QualitiesService
     ) { }
     
     ngOnInit() {
       // Set Defualt values
+      
       this.movie = {
         path:"",
         quality:'',
@@ -41,9 +43,8 @@ export class EditMovieComponent implements OnInit {
         this.qualities = qualities;
       });       
       
-      // this.route.params.subscribe((params)=>{ console.log(params); })
-      this.route.paramMap.subscribe((params)=>{
-        let movieId:string = params.get('id');        
+      this.route.params.subscribe((params)=>{
+        let movieId:string = params.id;        
         this.movieService.get(movieId).subscribe((movie:Movie)=>{
           this.movie = movie;
         });
