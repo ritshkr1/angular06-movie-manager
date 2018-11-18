@@ -1,13 +1,6 @@
 {
   "Movies": [
     {
-      "id": 1,
-      "path": "path1",
-      "quality": "720px",
-      "name": "film1",
-      "downloads": 1
-    },
-    {
       "id": 2,
       "path": "path2",
       "quality": "1080px",
@@ -44,9 +37,9 @@
     },
     {
       "path": "sdf",
-      "quality": "1080px",
+      "quality": "720px",
       "name": "sdf",
-      "downloads": 5,
+      "downloads": 6,
       "id": 7
     },
     {

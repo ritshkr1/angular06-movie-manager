@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed, fakeAsync, tick, inject } from '@angu
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { of } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
 
@@ -41,7 +41,7 @@ describe('MoviesComponent', () => {
       imports: [
         FormsModule,
         RouterTestingModule,
-        HttpModule
+        HttpClientModule
       ],
       providers:[
         MoviesService,

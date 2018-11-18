@@ -50,7 +50,6 @@ export class AddMovieComponent implements OnInit {
         console.log('Movie Added Sucessfully'); 
         this.router.navigate(['movies']);
       });
-
     }
     
   }

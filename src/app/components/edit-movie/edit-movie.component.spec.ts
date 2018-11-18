@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { of, Observable } from 'rxjs';
 import { Router,ActivatedRoute } from '@angular/router';
 import { RouterTestingModule, setupTestingRouter} from '@angular/router/testing';
@@ -44,7 +44,7 @@ describe('EditMovieComponent', () => {
       imports: [
         FormsModule,
         RouterTestingModule,
-        HttpModule
+        HttpClientModule
       ],
       providers:[
         { provide: Router, useValue: router },

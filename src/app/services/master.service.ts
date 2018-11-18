@@ -4,27 +4,23 @@ import {Observable, pipe} from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import {  appConfig  } from '../config/globel.conf'
+import { HttpClient } from '@angular/common/http';
 
 const hostUrl = `${appConfig.company.host.protocol}://${appConfig.company.host.url}:${appConfig.company.host.port}`;
 
 @Injectable()
 export class MasterService {
-  private ajaxUrl:string;
+  ajaxUrl:string;
   
-  constructor(private http: Http, protected endPoint:string) {
+  constructor(private http: HttpClient, protected endPoint:string) {
     this.ajaxUrl = `${hostUrl}/${this.endPoint}`;
   }
   
-  ngOnInit(): void {
-    
-  }
+  // ngOnInit(): void {}
   
   // Post data
-  add(formData) {        
-    // ...using get request
-    return this.http.post(this.ajaxUrl, formData)
-    // ...and calling .json() on the response to return data
-    .pipe(map((res: Response) => res.json()));
+  add(formData) {
+    return this.http.post(this.ajaxUrl, formData);
   }  
   
   // List all 
@@ -34,28 +30,19 @@ export class MasterService {
       getUrl = `${this.ajaxUrl}/${id}`;
     }
     
-    // ...using get request
-    return this.http.get(getUrl)
-    // ...and calling .json() on the response to return data
-    .pipe(map((res: Response) => res.json()));
+    return this.http.get(getUrl);
   }  
   
   // Update data
   update(formData) {      
-    let updateUrl = `${this.ajaxUrl}/${formData.id}`   
-    // ...using get request
-    return this.http.put(updateUrl, formData)
-    // ...and calling .json() on the response to return data
-    .pipe(map((res: Response) => res.json()));
+    let updateUrl = `${this.ajaxUrl}/${formData.id}`
+    return this.http.put(updateUrl, formData);
   }     
   
   // Delete data
   delete(id: Number) {
     let deleteUrl = `${this.ajaxUrl}/${id}`
-    // ...using get request
-    return this.http.delete(deleteUrl)
-    // ...and calling .json() on the response to return data
-    .pipe(map((res: Response) => res.json()));
+    return this.http.delete(deleteUrl);
   }  
   
 }
