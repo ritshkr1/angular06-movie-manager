@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Form } from '@angular/forms';
+import { Router } from '@angular/router';
+
+
 import { MoviesService } from '../../services/movies.service';
-import { Movie } from '../movies/movie';
+import { Movie } from '../../interfaces/movie';
+import { Quality } from '../../interfaces/quality';
+import { QualitiesService } from 'src/app/services/qualities.service';
 
 
 @Component({
@@ -10,23 +15,43 @@ import { Movie } from '../movies/movie';
   styleUrls: ['./add-movie.component.scss']
 })
 export class AddMovieComponent implements OnInit {
+  
+  constructor(
+    private router: Router,
+    private movieService: MoviesService,
+    private qualitiesService:QualitiesService
+    ) { }
+    
+    movie:Movie;
+    qualities:Quality[];
+    
+    ngOnInit() {
 
-  constructor(private movieService: MoviesService) { }
-  private movie:Movie;
-
-  ngOnInit() {
-    this.movie = {
-      path:"path",
-      quality:'720',
-      name:'name'
-    }
-  }
-
-  addMovie(){
-    this.movieService.add(this.movie).subscribe((res)=>{
-      console.log('Update Sucessfull');
+      // Set Defualt values
+      this.movie = {
+        path:"",
+        quality:'',
+        name:'',
+        downloads:0
+      };
       
-    });       
-  }
+      this.qualities = []
+      
+      // Get Qualities from server
+      this.qualitiesService.get().subscribe((qualities:Quality[]) =>{
+        this.qualities = qualities;
+      });
 
-}
+    }
+    
+    // Post data to server
+    addMovie(){      
+      this.movieService.add(this.movie).subscribe((res)=>{
+        console.log('Movie Added Sucessfully'); 
+        this.router.navigate(['movies']);
+      });
+
+    }
+    
+  }
+  

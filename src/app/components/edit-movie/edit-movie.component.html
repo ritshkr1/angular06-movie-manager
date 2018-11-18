@@ -1,30 +1,30 @@
-<div class="add-movie">
-  <h3>Add Movie</h3>
-
-  <form (submit)="addMovie()">
-
-    - {{qualities | json}} - 
+<div class="edit-movie">
+  
+  <h3 i18n>Edit Movie</h3> 
+  
+  <form (submit)="editMovie()">
+    
     <div class="name">
       <label for="name">Name : </label>
       <input type="text" [(ngModel)]="movie.name" name="name" title="Name">
     </div>
-
+    
     <div class="Path">
       <label for="Path">Path : </label>
       <input type="text" [(ngModel)]="movie.path" name="path" title="Path">
     </div>
-
+    
     <div class="quality">
       <label for="quality">Quality : </label>
-      <select [(ngModel)]="movie.quality" name="quality" title="Quality">
+      <select [(ngModel)]="movie.quality" name="quality" title="Quality" >
         <option [ngValue]="quality.quality" *ngFor="let quality of qualities">{{quality.quality}}</option>
       </select>
     </div>
-
-    <div class="input">
+    
+    <div class="input"> 
       <button type="submit">Save Movie</button>
     </div>
-
+    
   </form>
-
+  
 </div>

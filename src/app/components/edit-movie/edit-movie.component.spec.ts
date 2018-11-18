@@ -1,26 +1,29 @@
 import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 
+import { EditMovieComponent } from './edit-movie.component';
+import { FormsModule } from '@angular/forms';
+import { of } from 'rxjs';
+import { HttpModule } from '@angular/http';
+
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
-import { of } from 'rxjs';
-import { Router } from '@angular/router';
-import { RouterTestingModule } from '@angular/router/testing';
 
-import { AddMovieComponent } from './add-movie.component';
+import { RouterTestingModule } from '@angular/router/testing';
 import { MoviesService } from 'src/app/services/movies.service';
 import { QualitiesService } from 'src/app/services/qualities.service';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Movie } from 'src/app/interfaces/movie';
 import { Quality } from 'src/app/interfaces/quality';
 
-describe('AddMovieComponent', () => {
-  let component: AddMovieComponent;
-  let fixture: ComponentFixture<AddMovieComponent>;
+xdescribe('EditMovieComponent', () => {
+  let component: EditMovieComponent;
+  let fixture: ComponentFixture<EditMovieComponent>;
   let de: DebugElement;
   let moviesService: MoviesService;
   let qualitiesService: QualitiesService;
-  let router;
+  let router = {
+    navigate: jasmine.createSpy('navigate'),    // to spy on the url that has been routed
+  };
   let mockMovie:Movie;
   let mockQuality:Quality[];
   let mockInitMovie:Movie =  { 
@@ -31,12 +34,8 @@ describe('AddMovieComponent', () => {
   };
 
   beforeEach(async(() => {
-    router = {
-      navigate: jasmine.createSpy('navigate'),    // to spy on the url that has been routed
-    };
-
     TestBed.configureTestingModule({
-      declarations: [ AddMovieComponent ],
+      declarations: [ EditMovieComponent ],
       imports: [
         FormsModule,
         RouterTestingModule,
@@ -64,7 +63,7 @@ describe('AddMovieComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddMovieComponent);
+    fixture = TestBed.createComponent(EditMovieComponent);
     de = fixture.debugElement;
     component = fixture.componentInstance;    
     fixture.detectChanges();
@@ -96,7 +95,7 @@ describe('AddMovieComponent', () => {
     let mockAddMovieSpy = spyOn(moviesService, 'add')
     .and.returnValue(of(mockMovie));    
     
-    component.addMovie();
+    component.editMovie();
     
     expect(mockAddMovieSpy).toHaveBeenCalled();
 
@@ -108,7 +107,7 @@ describe('AddMovieComponent', () => {
     expect(component.movie).toEqual(mockInitMovie);
     component.movie = mockMovie;
     
-    let addMovieCompSpy = spyOn(component, 'addMovie')
+    let addMovieCompSpy = spyOn(component, 'editMovie')
     .and.callThrough();
     let addMovieSerSpy = spyOn(moviesService, 'add')
     .and.returnValue(of(mockMovie));

@@ -1,0 +1,16 @@
+<div>
+  <ul class="movies-list">
+    <li class="movie" *ngFor="let movie of movies" attr.id="movie{{movie.id}}">
+      <div>
+        <a class="movie-name-link" href="javascript:void(0)" (click)="details(movie)"> {{movie.name}} Views: {{movie.downloads}}</a>
+        <div class="movie-details" *ngIf="movie.details">
+          details:  - <a class="movie-path" href="{{movie.path}}">{{movie.path}}</a>
+          <a class="editBtn" id="movieEditBtn{{movie.id}}" [routerLink]="[ '/edit', movie.id ]">e</a> |
+          <a class="removeBtn" id="movieRmBtn{{movie.id}}" href="javascript:void(0)" (click)="remove(movie)">x</a><br>
+          <!-- <input type="text" value="User input Text to copy" #userinput> -->
+          <!-- <button (click)="copyInputMessage(userinput)" value="click to copy" >Copy from Textbox</button> -->
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>

@@ -4,23 +4,25 @@
       "id": 1,
       "name": "Spider Man",
       "quality": "720",
-      "path": "192.168.1.1/share/movies"
+      "path": "192.168.1.1/share/movies",
+      "downloads": 0
     },
     {
       "id": 2,
       "name": "Iron man",
       "quality": "720",
-      "path": "192.168.1.1/share/movies"
+      "path": "192.168.1.1/share/movies",
+      "downloads": 0
     }
   ],
-  "quality": [
+  "qualities": [
     {
       "id": 1,
-      "name": "720px"
+      "quality": "720px"
     },
     {
       "id": 2,
-      "name": "1080px"
+      "quality": "1080px"
     }
   ],
   "profile": {
