@@ -1,4 +1,4 @@
-# Ng6
+# Movies Manager - Angular 06 with unit test completed project
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.5.
 
