@@ -20,7 +20,7 @@ npm install -g json-server
 
 # To run server - I would run as application server
 json-server --watch db.json
-for more information [git](https://github.com/typicode/json-server/)
+more information [git](https://github.com/typicode/json-server/)
 
  
 
