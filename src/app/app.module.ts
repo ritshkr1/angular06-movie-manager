@@ -3,7 +3,8 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
-
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './components/app.component';
@@ -27,7 +28,9 @@ import { QualitiesService } from './services/qualities.service';
     HttpClientModule,
     BrowserModule,
     FormsModule,
-    RouterModule
+    RouterModule,
+    AngularFontAwesomeModule,
+    SweetAlert2Module.forRoot()
   ],
   providers: [
     MoviesService,

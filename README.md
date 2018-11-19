@@ -14,8 +14,6 @@ ng serve
 
 # Run the tests
 npm t
-<<<<<<< HEAD
-=======
 
 # To set up server 
 npm install -g json-server
@@ -24,7 +22,6 @@ npm install -g json-server
 json-server --watch db.json
 more information [git](https://github.com/typicode/json-server/)
 
->>>>>>> 04853c389ceded63c95c5b5f99d880cd86bfcb8c
  
 
 

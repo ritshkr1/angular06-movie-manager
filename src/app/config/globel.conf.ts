@@ -4,7 +4,7 @@ export const appConfig  = {
         host:{
             protocol:'http',
             url: "localhost",
-            port : '3000'
+            port : '4201'
         }
     },
     app:{

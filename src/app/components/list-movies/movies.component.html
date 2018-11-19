@@ -1,16 +1,27 @@
-<div>
-  <ul class="movies-list">
-    <li class="movie" *ngFor="let movie of movies" attr.id="movie{{movie.id}}">
-      <div>
-        <a class="movie-name-link" href="javascript:void(0)" (click)="details(movie)"> {{movie.name}} Views: {{movie.downloads}}</a>
-        <div class="movie-details" *ngIf="movie.details">
-          details:  - <a class="movie-path" href="{{movie.path}}">{{movie.path}}</a>
-          <a class="editBtn" id="movieEditBtn{{movie.id}}" [routerLink]="[ '/edit', movie.id ]">e</a> |
-          <a class="removeBtn" id="movieRmBtn{{movie.id}}" href="javascript:void(0)" (click)="remove(movie)">x</a><br>
-          <!-- <input type="text" value="User input Text to copy" #userinput> -->
-          <!-- <button (click)="copyInputMessage(userinput)" value="click to copy" >Copy from Textbox</button> -->
-        </div>
+<div id="accordion" class="movies-list">
+  <div class="card movie" *ngFor="let movie of movies" attr.id="movie{{movie.id}}">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+        <button class="btn btn-link movie-name-link" href="javascript:void(0)" 
+        (click)="details(movie)" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          {{movie.name}} Views: &nbsp;
+          <span class="badge badge-primary badge-pill">{{movie.downloads}}</span>
+        </button>
+      </h5>
+    </div>
+
+    <div id="collapseOne" class="collapse show movie-details" *ngIf="movie.details" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+        Number Downloads : {{movie.downloads}} <br>
+        Path - <fa name="link"></fa>
+          &nbsp;<a class="movie-path" href="{{movie.path}}">{{movie.path}}</a> <br>          
+          <a class="editBtn" id="movieEditBtn{{movie.id}}" [routerLink]="[ '/edit', movie.id ]">
+            Edit&nbsp;<fa name="pencil"></fa>
+          </a> |
+          <a class="removeBtn" id="movieRmBtn{{movie.id}}" href="javascript:void(0)" (click)="remove(movie)">
+            Remove &nbsp;<fa name="trash"></fa>
+          </a>
       </div>
-    </li>
-  </ul>
+    </div>
+  </div>
 </div>
