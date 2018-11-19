@@ -98,16 +98,16 @@ describe('MoviesComponent', () => {
       expect(component.movies).toEqual(mockMovies);
     });
     
-    it('should dispaly values in fron template', () => {
+    it('should dispaly values in from template', () => {
       component.ngOnInit();
       // wait for load views
       fixture.detectChanges();
       expect(getMovieSerSpy).toHaveBeenCalled();
       expect(listMovieSCompSpy).toHaveBeenCalled();
       
-      let firestMovie = de.query(By.css('li')).nativeElement
-      expect(firestMovie).toBeDefined();
-      expect(firestMovie.textContent).toContain(' film1 Views: 0')      
+      let firstMovie = de.query(By.css('.card-header'))
+      expect(firstMovie).toBeDefined();
+      expect(firstMovie.nativeElement.textContent).toContain(`${mockMovies[0].name} |-> Views: ${mockMovies[0].downloads}`);
     });
     
   });
@@ -152,7 +152,7 @@ describe('MoviesComponent', () => {
         if(mockMovies[index].details) {
 
           expect(movie.query(By.css('.movie-name-link')).nativeElement.textContent)
-          .toEqual(` ${mockMovies[index].name} Views: ${mockMovies[index].downloads}`);
+          .toEqual(` ${mockMovies[index].name} |-> Views: ${mockMovies[index].downloads}`);
        
         }
         else {
@@ -182,7 +182,7 @@ describe('MoviesComponent', () => {
         if(mockMovies[index].details) {
           expect(movie.query(By.css('.movie-name-link'))).toBeDefined();
           expect(movie.query(By.css('.movie-name-link')).nativeElement.textContent)
-          .toEqual(` ${mockMovies[index].name} Views: ${mockMovies[index].downloads}`);
+          .toEqual(`${mockMovies[index].name} |-> Views: ${mockMovies[index].downloads}`);
         }
         else {
           expect(movie.query(By.css('movie-details'))).toBeNull();
@@ -197,7 +197,7 @@ describe('MoviesComponent', () => {
       
       let button = de.query(By.css('#movie1 .editBtn')).nativeElement;
       expect(button).toBeDefined();
-      expect(button.textContent).toEqual('e');
+      expect(button.textContent).toEqual(' Edit ');
       expect(button.getAttribute('id')).toEqual(`movieEditBtn${mockMovies[0].id}`);
     });
     
@@ -208,7 +208,7 @@ describe('MoviesComponent', () => {
       
       let button = de.query(By.css('#movie1 .removeBtn')).nativeElement;
       expect(button).toBeDefined();
-      expect(button.textContent).toEqual('x');
+      expect(button.textContent).toEqual(' Remove ');
       expect(button.getAttribute('id')).toEqual(`movieRmBtn${mockMovies[0].id}`);
     });
     

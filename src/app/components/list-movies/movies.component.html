@@ -1,25 +1,23 @@
 <div id="accordion" class="movies-list">
   <div class="card movie" *ngFor="let movie of movies" attr.id="movie{{movie.id}}">
-    <div class="card-header" id="headingOne">
+    <div class="card-header" >
       <h5 class="mb-0">
         <button class="btn btn-link movie-name-link" href="javascript:void(0)" 
-        (click)="details(movie)" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-          {{movie.name}} Views: &nbsp;
-          <span class="badge badge-primary badge-pill">{{movie.downloads}}</span>
-        </button>
+        (click)="details(movie)" data-toggle="collapse" data-target="#collapseOne" 
+        aria-expanded="true" aria-controls="collapseOne">{{movie.name}} |-> Views: {{movie.downloads}}</button>
       </h5>
     </div>
 
     <div id="collapseOne" class="collapse show movie-details" *ngIf="movie.details" aria-labelledby="headingOne" data-parent="#accordion">
       <div class="card-body">
         Number Downloads : {{movie.downloads}} <br>
-        Path - <fa name="link"></fa>
+        Path -> 
           &nbsp;<a class="movie-path" href="{{movie.path}}">{{movie.path}}</a> <br>          
           <a class="editBtn" id="movieEditBtn{{movie.id}}" [routerLink]="[ '/edit', movie.id ]">
-            Edit&nbsp;<fa name="pencil"></fa>
+            Edit
           </a> |
           <a class="removeBtn" id="movieRmBtn{{movie.id}}" href="javascript:void(0)" (click)="remove(movie)">
-            Remove &nbsp;<fa name="trash"></fa>
+            Remove
           </a>
       </div>
     </div>

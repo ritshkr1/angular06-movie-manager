@@ -29,7 +29,6 @@ import { QualitiesService } from './services/qualities.service';
     BrowserModule,
     FormsModule,
     RouterModule,
-    AngularFontAwesomeModule,
     SweetAlert2Module.forRoot()
   ],
   providers: [
