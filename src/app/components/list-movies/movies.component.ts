@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Movie } from '../../interfaces/movie';
 
-// Configuration file
-import { appConfig } from '../../config/globel.conf'
-
 import { MoviesService } from '../../services/movies.service';
 
 @Component({
@@ -20,9 +17,7 @@ export class MoviesComponent implements OnInit {
   }
   
   listAll(){
-    this.movieService.get().subscribe((movies:Movie[]) =>{
-      // console.log(movies);
-      
+    this.movieService.getAll().subscribe((movies:Movie[]) =>{
       this.movies = movies;
     });
   }
@@ -35,8 +30,8 @@ export class MoviesComponent implements OnInit {
   
   details(movie){
     if(!movie.details) {
-      this.countDownloads(movie);
       movie.details = true;
+      this.countDownloads(movie);
     }      
     else {
       movie.details = !movie.details;
@@ -44,10 +39,15 @@ export class MoviesComponent implements OnInit {
   }
 
   countDownloads(movie:Movie){
-    movie.downloads = movie.downloads+1;
-    this.movieService.update(movie).subscribe((res)=>{
-      console.log('Update Successfull');
-    })
+    if(movie.hasOwnProperty('downloads')) {
+      movie.downloads = movie.downloads+1;
+    }
+    else{
+      movie.downloads = 1;
+    }
+    let movieId = movie.id;
+    // delete(movie.id);
+    this.movieService.update(movieId, movie);
   }
   
   /* To copy Text from Textbox */

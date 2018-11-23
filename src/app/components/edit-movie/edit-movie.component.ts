@@ -39,7 +39,7 @@ export class EditMovieComponent implements OnInit {
       this.qualities = []
       
       // Get Qualities from server
-      this.qualitiesService.get().subscribe((qualities:Quality[]) =>{
+      this.qualitiesService.getAll().subscribe((qualities:Quality[]) =>{
         this.qualities = qualities;
       });       
       
@@ -53,7 +53,7 @@ export class EditMovieComponent implements OnInit {
     
     // Update the movie details
     editMovie(){    
-      this.movieService.update(this.movie).subscribe((res)=>{
+      this.movieService.update(this.movie.id, this.movie).subscribe((res)=>{
         console.log('Movie Updated Sucessfully'); 
         this.router.navigate(['movies']);
       });  

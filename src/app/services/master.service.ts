@@ -1,48 +1,83 @@
 import { Injectable } from '@angular/core';
-import {Http, Response} from '@angular/http';
-import {Observable, pipe} from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import * as firebase from 'firebase';
+import firestore from 'firebase/firestore'
 
 import {  appConfig  } from '../config/globel.conf'
 import { HttpClient } from '@angular/common/http';
 
-const hostUrl = `${appConfig.company.host.protocol}://${appConfig.company.host.url}:${appConfig.company.host.port}`;
-
 @Injectable()
 export class MasterService {
   ajaxUrl:string;
-  
+  ref:any;
   constructor(private http: HttpClient, protected endPoint:string) {
-    this.ajaxUrl = `${hostUrl}/${this.endPoint}`;
+     
+    this.ref = firebase.firestore().collection(endPoint);
   }
-  
-  // ngOnInit(): void {}
-  
+    
   // Post data
   add(formData) {
-    return this.http.post(this.ajaxUrl, formData);
+    return new Observable((observer) => {
+      this.ref.add(formData).then((doc) => {
+        observer.next({
+          key: doc.id,
+        });
+      });
+    });
   }  
   
   // List all 
-  get(id=null) {
-    let getUrl:string = this.ajaxUrl;
-    if (id!=null) {
-      getUrl = `${this.ajaxUrl}/${id}`;
-    }
-    
-    return this.http.get(getUrl);
+  getAll() {
+    return new Observable((observer) => {
+      this.ref.onSnapshot((querySnapshot) => {
+        let boards = [];
+        querySnapshot.forEach((doc) => {
+          let data = doc.data();
+          console.log('data',data);
+          boards.push({
+            key: doc.id,
+            name: data.name,
+            path: data.path
+          });
+        });
+        console.log('boards',boards);
+        observer.next(boards);
+      });
+    });
   }  
+
+  get(id: string): Observable<any> {
+    return new Observable((observer) => {
+      this.ref.doc(id).get().then((doc) => {
+        let data = doc.data();
+        observer.next({
+          key: doc.id,
+          name: data.name,
+          path: data.path
+        });
+      });
+    });
+  }
+
+
   
   // Update data
   update(formData) {      
-    let updateUrl = `${this.ajaxUrl}/${formData.id}`
-    return this.http.put(updateUrl, formData);
+    return new Observable((observer) => {
+      this.ref.doc(formData.id).set(formData).then(() => {
+        observer.next();
+      });
+    });
   }     
   
   // Delete data
   delete(id: Number) {
-    let deleteUrl = `${this.ajaxUrl}/${id}`
-    return this.http.delete(deleteUrl);
+    return new Observable((observer) => {
+      this.ref.doc(id).delete().then(() => {
+        observer.next();
+      });
+    });
   }  
   
 }

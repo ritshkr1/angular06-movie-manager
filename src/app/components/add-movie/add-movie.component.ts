@@ -32,13 +32,14 @@ export class AddMovieComponent implements OnInit {
         path:"",
         quality:'',
         name:'',
-        downloads:0
+        downloads:0,
+        details:false
       };
       
       this.qualities = []
       
       // Get Qualities from server
-      this.qualitiesService.get().subscribe((qualities:Quality[]) =>{
+      this.qualitiesService.getAll().subscribe((qualities:Quality[]) =>{
         this.qualities = qualities;
       });
 
@@ -46,10 +47,13 @@ export class AddMovieComponent implements OnInit {
     
     // Post data to server
     addMovie(){      
-      this.movieService.add(this.movie).subscribe((res)=>{
-        console.log('Movie Added Sucessfully'); 
-        this.router.navigate(['movies']);
-      });
+      this.movieService.add(this.movie)
+        .subscribe(res => {
+            let id = res['key'];
+            this.router.navigate(['movies']);
+          }, (err) => {
+            console.log(err);
+          });
     }
     
   }
