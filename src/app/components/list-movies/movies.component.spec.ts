@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed, fakeAsync, tick, inject } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick, inject, waitForAsync } from '@angular/core/testing';
 
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
@@ -35,7 +35,7 @@ describe('MoviesComponent', () => {
     }
   ];
   
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ MoviesComponent ],
       imports: [
@@ -140,7 +140,7 @@ describe('MoviesComponent', () => {
       .and.returnValue(of(mockMovies[1]))
     });
 
-    xit('should hide details after click name', async(() => {
+    xit('should hide details after click name', waitForAsync(() => {
       component.ngOnInit();
       // wait for load views
       fixture.detectChanges(); 

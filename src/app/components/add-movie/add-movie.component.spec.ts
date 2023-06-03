@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
@@ -30,7 +30,7 @@ describe('AddMovieComponent', () => {
     downloads: 0 
   };
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     router = {
       navigate: jasmine.createSpy('navigate'),    // to spy on the url that has been routed
     };

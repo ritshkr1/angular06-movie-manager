@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
@@ -114,7 +114,7 @@ describe('EditMovieComponent', () => {
     expect(component.qualities.length).toEqual(2);
   }));
 
-  it('should save movie redirect to movies', async(() => {
+  it('should save movie redirect to movies', waitForAsync(() => {
     component.movie = mockMovie;
     component.qualities = mockQualities;
     fixture.detectChanges();
